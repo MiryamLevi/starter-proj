@@ -1,5 +1,6 @@
 .home {
     text-align: center;
+    display: grid;
 }
 
 .home h1 {
@@ -9,4 +10,18 @@
 
 .home img {
     width: 500px;
+}
+
+.home article.menu {
+    height: 100px;
+    width: 200px;
+    border-radius: 20;
+    background-color: blue;
+}
+
+.home article.menu-item-content {
+    height: 1100px;
+    width: 200px;
+    border-radius: 20;
+    background-color: blue;
 }

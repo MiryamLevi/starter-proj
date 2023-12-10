@@ -3,8 +3,9 @@
 export function Home() {
     return (
         <section className="home">
-            <h1>Welcome to our React App</h1>
-            {/* <img src={imgUrl} alt="" /> */}
+            <article className="menu"></article>
+            <article className="menu-item-content"></article>
+
         </section>
     )
 }
