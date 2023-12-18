@@ -1,6 +1,8 @@
 .home {
     text-align: center;
-    display: grid;
+    display: flex;
+    gap: 18px;
+
 }
 
 .home h1 {
@@ -13,15 +15,18 @@
 }
 
 .home article.menu {
-    height: 100px;
+    height: 600px;
     width: 200px;
-    border-radius: 20;
-    background-color: blue;
+    border-radius: 20px;
+    background-color: white;
+    opacity: 0.5;
 }
 
 .home article.menu-item-content {
-    height: 1100px;
-    width: 200px;
-    border-radius: 20;
-    background-color: blue;
+    height: 600px;
+    width: 1000px;
+    border-radius: 20px;
+    background-color: white;
+    opacity: 0.5;
+
 }

@@ -3,7 +3,7 @@ import imgUrl from "./assets/imgs/logo.png";
 
 export function App() {
   return (
-    <section className="main-app">
+    <section className="main-app bg">
       <header className="app-header">
         <section className="container">
           <img src={imgUrl} alt="logo" className="logo" />

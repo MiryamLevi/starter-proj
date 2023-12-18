@@ -1,11 +1,11 @@
-
-
+import { EmailIndex } from './EmailIndex'
+import {Menu} from '../cmps/Menu'
 export function Home() {
     return (
         <section className="home">
-            <article className="menu"></article>
+            <Menu/>
             <article className="menu-item-content"></article>
-
+            <EmailIndex/>
         </section>
     )
 }
