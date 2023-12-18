@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://MiryamLevi.github.io/starter-proj/",
+  "homepage": "https://miryamlevi.github.io/starter-proj/",
   "scripts": {
     "dev": "vite",
     "predeploy": "npm run build",
