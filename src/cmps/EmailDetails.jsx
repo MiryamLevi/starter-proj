@@ -1,6 +1,6 @@
-import { useEffect, useState  } from "react";
-import { Link, useParams } from "react-router-dom";
-import {emailService} from '../services/emails.service'
+import { useEffect, useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { emailService } from "../services/emails.service";
 
 {
   /* • Routable component (page)
@@ -21,23 +21,33 @@ import {emailService} from '../services/emails.service'
 //     to: 'user@appsus.com'
 //     }
 
-export function EmailDetails() {
+export function EmailDetails({onEmailDelete}) {
   const [email, setEmail] = useState(null);
   const params = useParams();
+  const navigate = useNavigate()
 
-  useEffect(() => {loadEmail()}, []);
+  useEffect(() => {
+    loadEmail();
+  }, []);
 
   async function loadEmail() {
     const email = await emailService.getById(params.emailID);
-    setEmail(email)
+    email.isRead = true
+    setEmail(email);
   }
 
-
-  if (!email) return <div>Loading...</div>
+  if (!email) return <div>Loading...</div>;
   let emailSentAt = new Date(email.sentAt * 1000).toLocaleString();
+
+  function onBack() {
+    console.log("isRead", email.isRead)
+    emailService.save(email)
+    navigate('/inbox')
+  }
+
   return (
     <section className="email-details">
-        <Link to={'/inbox'}> Back </Link>
+      <label onClick={onBack}> Back </label>
       <h1> Email Details</h1>
       <h3>From: {email.from}</h3>
       <h4>To: {email.to}</h4>
