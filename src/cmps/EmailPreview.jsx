@@ -28,7 +28,7 @@ export function EmailPreview({ email, onEmailPreviewClicked }) {
       <Link to={`/inbox/${email.id}`}>
         <p style={textStyle}>
           {" "}
-          {fromName} {"                "} {email.subject} | {datetime}{" "}
+          {fromName} | {email.subject} | {datetime}{" "}
         </p>
       </Link>
     </section>

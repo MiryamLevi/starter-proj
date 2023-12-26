@@ -61,22 +61,13 @@ const STORAGE_KEY = "emails";
 
 _createEmails();
 
-// async function query() {
-//   return new Promise((resolve) => setTimeout(() => resolve(temp_emails), 100));
-// }
-
 async function query(filterBy) {
-    let emails = await storageService.query(STORAGE_KEY)
-    if (filterBy) {
-        let { minBatteryStatus, model = '' } = filterBy
-        minBatteryStatus = minBatteryStatus || 0
-        const regexModelTerm = new RegExp(model, 'i')
-        emails = emails.filter(email =>
-            regexModelTerm.test(email.model) &&
-            email.batteryStatus > minBatteryStatus
-        )
-    }
-    return emails
+  let emails = await storageService.query(STORAGE_KEY);
+  if (filterBy) {
+    var { subject } = filterBy
+    emails = emails.filter(email => email.subject.toLowerCase().includes(subject.toLowerCase()) || email.body.toLowerCase().includes(subject.toLowerCase()) )
+}
+  return emails;
 }
 
 function getById(id) {
@@ -96,20 +87,35 @@ function save(emailToSave) {
   }
 }
 
-function createEmail(model = "", type = "", batteryStatus = 100) {
+function createEmail(
+  subject = "",
+  body = "",
+  isRead = false,
+  isStarred = false,
+  sentAt = null,
+  removedAt = null,
+  from = "",
+  to = ""
+) {
   return {
-    model,
-    batteryStatus,
-    type,
+    subject,
+    body,
+    isRead,
+    isStarred,
+    sentAt,
+    removedAt,
+    from,
+    to,
   };
 }
 
 function getDefaultFilter() {
   return {
-    type: "",
-    minBatteryStatus: 0,
-    maxBattery: "",
-    model: "",
+    subject: "",
+    body: 0,
+    isStarred: false,
+    removedAt: "",
+    isRead: false,
   };
 }
 

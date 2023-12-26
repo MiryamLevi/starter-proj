@@ -2,6 +2,7 @@ import { EmailIndex } from "./EmailIndex";
 import { Menu } from "../cmps/Menu";
 import {HashRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import { EmailDetails } from "../cmps/EmailDetails";
+import { EmailFilter } from "../cmps/EmailFilter";
 
 export function Home() {
   return (
