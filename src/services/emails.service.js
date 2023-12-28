@@ -64,9 +64,13 @@ _createEmails();
 async function query(filterBy) {
   let emails = await storageService.query(STORAGE_KEY);
   if (filterBy) {
-    var { subject } = filterBy
-    emails = emails.filter(email => email.subject.toLowerCase().includes(subject.toLowerCase()) || email.body.toLowerCase().includes(subject.toLowerCase()) )
-}
+    var { subject } = filterBy;
+    emails = emails.filter(
+      (email) =>
+        email.subject.toLowerCase().includes(subject.toLowerCase()) ||
+        email.body.toLowerCase().includes(subject.toLowerCase())
+    );
+  }
   return emails;
 }
 
@@ -122,16 +126,38 @@ function getDefaultFilter() {
 function _createEmails() {
   let emails = utilService.loadFromStorage(STORAGE_KEY);
   if (!emails || !emails.length) {
-    emails = [
+    [
       {
         id: "e101",
         subject: "Miss you!",
-        body: "Would love to catch up sometimes",
+        body: "How are you dear? Will you come to the wedding tonight?",
         isRead: false,
         isStarred: false,
-        sentAt: 1551133930594,
-        removedAt: null, //for later use
-        from: "momo@momo.com",
+        sentAt: 1704078522,
+        removedAt: null,
+        from: "father@gmail.com",
+        to: "user@appsus.com",
+      },
+      {
+        id: "e102",
+        subject: "Winter Sale!",
+        body: "All the shirts in 50%",
+        isRead: true,
+        isStarred: false,
+        sentAt: 1702976732,
+        removedAt: null,
+        from: "sales@momo.com",
+        to: "user@appsus.com",
+      },
+      {
+        id: "e103",
+        subject: "Can I come earlier?",
+        body: "I have an appointment in tour clinic tomorrow",
+        isRead: true,
+        isStarred: false,
+        sentAt: 1702976900,
+        removedAt: null,
+        from: "client@momo.com",
         to: "user@appsus.com",
       },
     ];

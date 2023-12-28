@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { emailService } from "../services/emails.service";
 import { EmailList } from "../cmps/EmailList";
 import { EmailFilter } from "../cmps/EmailFilter";
+import { Outlet } from "react-router-dom";
 
 export function EmailIndex() {
   const [emails, setEmails] = useState(null);
@@ -54,6 +55,7 @@ export function EmailIndex() {
         onRemoveEmail={onRemoveEmail}
         onEmailPreviewClicked={onEmailPreviewClicked}
       />
+      <Outlet/>
     </section>
   );
 }

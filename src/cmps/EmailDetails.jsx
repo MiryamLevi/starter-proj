@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { emailService } from "../services/emails.service";
+import { IoIosArrowRoundBack } from "react-icons/io";
+import { FaRegTrashAlt } from "react-icons/fa";
 
 {
-  /* • Routable component (page)
-• show the entire email
+  /* 
 • Allow deleting an email (using the service)
-• Allow navigating back to the list */
+*/
 }
 
 // {
@@ -21,39 +22,56 @@ import { emailService } from "../services/emails.service";
 //     to: 'user@appsus.com'
 //     }
 
-export function EmailDetails({onEmailDelete}) {
+export function EmailDetails() {
   const [email, setEmail] = useState(null);
   const params = useParams();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   useEffect(() => {
     loadEmail();
   }, []);
 
   async function loadEmail() {
+    try{
     const email = await emailService.getById(params.emailID);
-    email.isRead = true
+    email.isRead = true;
     setEmail(email);
+    }
+    catch(error)
+    {
+      navigate('/inbox')
+      console.log('Has issues loading email', error);
+    }
+  }
+
+  function onEmailDelete(emailID)
+  {
+    emailService.remove(emailID);
+    navigate("/inbox");
   }
 
   if (!email) return <div>Loading...</div>;
   let emailSentAt = new Date(email.sentAt * 1000).toLocaleString();
 
   function onBack() {
-    console.log("isRead", email.isRead)
-    emailService.save(email)
-    navigate('/inbox')
+    console.log("isRead", email.isRead);
+    emailService.save(email);
+    navigate("/inbox");
   }
 
   return (
     <section className="email-details">
-      <label onClick={onBack}> Back </label>
-      <h1> Email Details</h1>
-      <h3>From: {email.from}</h3>
-      <h4>To: {email.to}</h4>
-      <h2>Time: {emailSentAt}</h2>
-      <h3>Subject: {email.subject}</h3>
-      <h3>Content:{email.body}</h3>
+      <label onClick={onBack}>
+        <IoIosArrowRoundBack />
+      </label>
+      <label htmlFor="delete" onClick={()=>onEmailDelete(email.id)}><FaRegTrashAlt/></label>
+      <div className="details-container">
+        <h2>{email.subject}</h2>
+        <h4>From: {email.from}</h4>
+        <h4>To: {email.to}</h4>
+        <h4> {emailSentAt}</h4>
+        <h3>{email.body}</h3>
+      </div>
     </section>
   );
 }

@@ -1,7 +1,5 @@
-// •  Present an email preview
-// • Renders the subject (with text size limit)
-// • Gives visual indication for read/unread
 // • Support hover state
+// • let the action (star, trash) to be another component
 import { GoTrash } from "react-icons/go";
 import { CiStar } from "react-icons/ci";
 import { Link } from "react-router-dom";
@@ -14,6 +12,11 @@ export function EmailPreview({ email, onEmailPreviewClicked }) {
     fontWeight: email.isRead ? "normal" : "bold",
   };
 
+  function onSelectEmail(ev)
+  {
+    ev.target.style.backgroundColor = 'blue';  
+  }
+  
   return (
     <section
       className="email-preview"
@@ -21,13 +24,10 @@ export function EmailPreview({ email, onEmailPreviewClicked }) {
         onEmailPreviewClicked(email.id);
       }}
     >
-      <input type="checkbox"></input>
-      <label>
-        <CiStar />
-      </label>
+      <input type="checkbox" name="chooseEmail" key={email.id} onClick={onSelectEmail}/>
+        <label><CiStar key={email.id}/></label>
       <Link to={`/inbox/${email.id}`}>
         <p style={textStyle}>
-          {" "}
           {fromName} | {email.subject} | {datetime}{" "}
         </p>
       </Link>
